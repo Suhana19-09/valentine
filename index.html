@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Cutie ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+h1 {
+    color: #ff3366;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#yes {
+    background: #ff3366;
+    color: white;
+}
+
+#no {
+    background: #999;
+    color: white;
+}
+</style>
+</head>
+
+
+<body>
+
+<div id="box">
+
+<h1 id="text">Hey, cutie… I have something to ask you 💌</h1>
+
+<button id="yes" onclick="next()">Next ➡️</button>
+<button id="no" onclick="noClick()">No 🙈</button>
+
+</div>
+
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+
+let step = 0;
+
+let texts = [
+    "We met… and my world changed ✨",
+    "You make me smile without trying 😊",
+    "Every moment with you feels special 💕",
+    "My heart chose you…",
+    "So now I want to ask… 💖",
+    "Will you be my Valentine? 💘"
+];
+
+let noTexts = [
+    "Are you sure? 😢",
+    "Think again… 💔",
+    "My heart is breaking… 🥺",
+    "Please don’t say no… 😭",
+    "Last chance.Please, click on 'Yes', cutie… 💞"
+];
+
+let noCount = 0;
+
+
+// Play music (browser needs click)
+function playMusic() {
+    let music = document.getElementById("bgMusic");
+    music.play().catch(()=>{});
+}
+
+
+// NEXT button
+function next() {
+
+    playMusic(); // start music
+
+    step++;
+
+    if(step < texts.length) {
+        document.getElementById("text").innerHTML = texts[step];
+    }
+
+    // Last question
+    if(step === texts.length - 1) {
+        document.getElementById("yes").innerHTML = "YES ❤️";
+        document.getElementById("no").innerHTML = "NO 💔";
+    }
+
+    // After YES
+    if(step === texts.length) {
+        document.body.style.background =
+        "linear-gradient(135deg, #a1ffce, #faffd1)";
+
+        document.getElementById("box").innerHTML = `
+        <h1>YAYYY!!! 😍💖</h1>
+        <p>You just made me the happiest person ❤️</p>
+        <p>Happy Valentine’s Day 💐</p>
+        `;
+    }
+}
+
+
+// NO button
+function noClick() {
+
+    playMusic(); // also start music
+
+    if(noCount < noTexts.length) {
+        document.getElementById("text").innerHTML =
+        noTexts[noCount];
+        noCount++;
+    }
+
+    // Make No button move
+    let x = Math.random() * 200 - 100;
+    let y = Math.random() * 200 - 100;
+
+    document.getElementById("no").style.transform =
+    `translate(${x}px, ${y}px)`;
+}
+
+</script>
+
+</body>
+</html>
